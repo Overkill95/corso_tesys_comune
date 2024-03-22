@@ -12,6 +12,7 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.naming.NamingException;
+import javax.xml.ws.WebServiceException;
 
 import com.employees.connector.DatabaseConnector;
 import com.employees.pojo.Employee;
@@ -49,9 +50,7 @@ public class EmployeeService {
             
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
-    	} catch (NamingException e1) {
-			e1.printStackTrace();
-		}
+    	} 
 		return employees;
     }
     
