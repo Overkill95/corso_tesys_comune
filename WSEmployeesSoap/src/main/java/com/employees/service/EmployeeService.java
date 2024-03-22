@@ -12,7 +12,6 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.naming.NamingException;
-import javax.xml.ws.WebServiceException;
 
 import com.employees.connector.DatabaseConnector;
 import com.employees.pojo.Employee;
@@ -25,7 +24,7 @@ public class EmployeeService {
     public List<Employee> getEmployees() throws WebServiceException{
     	List<Employee> employees = new ArrayList<Employee>();
     	try (Connection connection = DatabaseConnector.getConnection()) {
-        	PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM employees");
+        	PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM employees_Daniel");
         	ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -48,7 +47,7 @@ public class EmployeeService {
             }
             return employees;
             
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
     	} catch (NamingException e1) {
 			e1.printStackTrace();

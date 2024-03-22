@@ -1,0 +1,112 @@
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.employees.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://service.employees.com/" name="EmployeeServiceService">
+<types>
+<xsd:schema>
+<xsd:import namespace="http://service.employees.com/" schemaLocation="http://localhost:9083/WSEmployeesSoap/wsemployee?xsd=1"/>
+</xsd:schema>
+</types>
+<message name="updateEmployee">
+<part name="parameters" element="tns:updateEmployee"/>
+</message>
+<message name="updateEmployeeResponse">
+<part name="parameters" element="tns:updateEmployeeResponse"/>
+</message>
+<message name="deleteEmployee">
+<part name="parameters" element="tns:deleteEmployee"/>
+</message>
+<message name="deleteEmployeeResponse">
+<part name="parameters" element="tns:deleteEmployeeResponse"/>
+</message>
+<message name="addEmployee">
+<part name="parameters" element="tns:addEmployee"/>
+</message>
+<message name="addEmployeeResponse">
+<part name="parameters" element="tns:addEmployeeResponse"/>
+</message>
+<message name="getEmployeeById">
+<part name="parameters" element="tns:getEmployeeById"/>
+</message>
+<message name="getEmployeeByIdResponse">
+<part name="parameters" element="tns:getEmployeeByIdResponse"/>
+</message>
+<message name="getEmployees">
+<part name="parameters" element="tns:getEmployees"/>
+</message>
+<message name="getEmployeesResponse">
+<part name="parameters" element="tns:getEmployeesResponse"/>
+</message>
+<portType name="EmployeeService">
+<operation name="updateEmployee">
+<input wsam:Action="http://service.employees.com/EmployeeService/updateEmployeeRequest" message="tns:updateEmployee"/>
+<output wsam:Action="http://service.employees.com/EmployeeService/updateEmployeeResponse" message="tns:updateEmployeeResponse"/>
+</operation>
+<operation name="deleteEmployee">
+<input wsam:Action="http://service.employees.com/EmployeeService/deleteEmployeeRequest" message="tns:deleteEmployee"/>
+<output wsam:Action="http://service.employees.com/EmployeeService/deleteEmployeeResponse" message="tns:deleteEmployeeResponse"/>
+</operation>
+<operation name="addEmployee">
+<input wsam:Action="http://service.employees.com/EmployeeService/addEmployeeRequest" message="tns:addEmployee"/>
+<output wsam:Action="http://service.employees.com/EmployeeService/addEmployeeResponse" message="tns:addEmployeeResponse"/>
+</operation>
+<operation name="getEmployeeById">
+<input wsam:Action="http://service.employees.com/EmployeeService/getEmployeeByIdRequest" message="tns:getEmployeeById"/>
+<output wsam:Action="http://service.employees.com/EmployeeService/getEmployeeByIdResponse" message="tns:getEmployeeByIdResponse"/>
+</operation>
+<operation name="getEmployees">
+<input wsam:Action="http://service.employees.com/EmployeeService/getEmployeesRequest" message="tns:getEmployees"/>
+<output wsam:Action="http://service.employees.com/EmployeeService/getEmployeesResponse" message="tns:getEmployeesResponse"/>
+</operation>
+</portType>
+<binding name="EmployeeServicePortBinding" type="tns:EmployeeService">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="updateEmployee">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="deleteEmployee">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="addEmployee">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getEmployeeById">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getEmployees">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+</binding>
+<service name="EmployeeServiceService">
+<port name="EmployeeServicePort" binding="tns:EmployeeServicePortBinding">
+<soap:address location="http://localhost:9083/WSEmployeesSoap/wsemployee"/>
+</port>
+</service>
+</definitions>

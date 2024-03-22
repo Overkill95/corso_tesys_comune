@@ -9,8 +9,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class DatabaseConnector {
-	
-	public static Connection getConnection() throws SQLException, NamingException {
+
+    public static Connection getConnection() throws SQLException, NamingException {
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
