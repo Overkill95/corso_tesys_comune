@@ -1,22 +1,25 @@
 package com.employees.connector;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DatabaseConnector {
-    private static final String URL = "jdbc:mysql://localhost:3306/employeesdb";
-    private static final String USER = "root";
-    private static final String PASSWORD = "root";
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-    public static Connection getConnection() {
-        Connection connection = null;
+public class DatabaseConnector {
+	
+	public static Connection getConnection() throws SQLException, NamingException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
+            Context initContext = new InitialContext();
+            Context envContext = (Context) initContext.lookup("java:/comp/env");
+            DataSource ds = (DataSource) envContext.lookup("jdbc/CORSO2024");
+            return ds.getConnection();
+        } catch (NamingException | SQLException e) {
             e.printStackTrace();
+            throw e;
         }
-        return connection;
-    }
+    
+}
 }

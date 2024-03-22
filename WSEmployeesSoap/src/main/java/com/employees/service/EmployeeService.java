@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.naming.NamingException;
+import javax.xml.ws.WebServiceException;
 
 import com.employees.connector.DatabaseConnector;
 import com.employees.pojo.Employee;
@@ -20,7 +22,7 @@ public class EmployeeService {
 	
 
     @WebMethod
-    public List<Employee> getEmployees(){
+    public List<Employee> getEmployees() throws WebServiceException{
     	List<Employee> employees = new ArrayList<Employee>();
     	try (Connection connection = DatabaseConnector.getConnection()) {
         	PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM employees");
@@ -48,7 +50,9 @@ public class EmployeeService {
             
         } catch (SQLException e) {
             e.printStackTrace();
-    	}
+    	} catch (NamingException e1) {
+			e1.printStackTrace();
+		}
 		return employees;
     }
     
@@ -77,7 +81,7 @@ public class EmployeeService {
                );
         	}
     	}
-    	catch(SQLException e) {
+    	catch(SQLException | NamingException e) {
     		e.printStackTrace();
     	}
 		return null;
@@ -113,7 +117,7 @@ public class EmployeeService {
             	return "No Employee found with ID " + employee_id + ".";
         	}
         }
-    	catch(SQLException e) {
+    	catch(SQLException | NamingException e) {
     		e.printStackTrace();
     		return "Error occurred while updating Employee with ID " + employee_id + ": " + e.getMessage();
     	}
@@ -121,7 +125,7 @@ public class EmployeeService {
     
     
     @WebMethod
-    public String addEmployee(int employee_id, String first_name, String last_name, String email, String phone_number, Date hire_date, int job_id, BigDecimal salary, int manager_id, int department_id) {
+    public String addEmployee(int employee_id, String first_name, String last_name, String email, String phone_number, Date hire_date, int job_id, BigDecimal salary, int manager_id, int department_id) throws WebServiceException {
     	try (Connection connection = DatabaseConnector.getConnection()) {
         	PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, manager_id, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         	
@@ -149,7 +153,7 @@ public class EmployeeService {
             	return "Error while creating Employee";
         	}
         }
-    	catch(SQLException e) {
+    	catch(SQLException | NamingException e) {
     		e.printStackTrace();
     		return "Error occurred while creating Employee: " + e.getMessage();
     	}
@@ -157,7 +161,7 @@ public class EmployeeService {
     
     
     @WebMethod
-    public String deleteEmployee(int employee_id) {
+    public String deleteEmployee(int employee_id) throws WebServiceException {
     	try (Connection connection = DatabaseConnector.getConnection()) {
         	PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM employees WHERE employees.employee_id = ?");
         	preparedStatement.setInt(1, employee_id);
@@ -170,7 +174,7 @@ public class EmployeeService {
         		return "No Employee found with ID " + employee_id + ".";
         	}
         }
-    	catch(SQLException e) {
+    	catch(SQLException | NamingException e) {
     		e.printStackTrace();
     		return "Error while deleting Employee with ID " + employee_id + ": " + e.getMessage();
     	}
