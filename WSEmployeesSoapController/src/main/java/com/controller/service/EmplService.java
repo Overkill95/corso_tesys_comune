@@ -19,7 +19,7 @@ import com.employees.service.EmployeeServiceService;
 @Service
 public class EmplService {
 
-	String endpoint = "http://localhost:8080/WSEmployeesSoap/wsemployee";
+	String endpoint = "http://localhost:9083/WSEmployeesSoap/wsemployee";
 	EmployeeServiceService employeeService = new EmployeeServiceService();
 	EmployeeService port = employeeService.getEmployeeServicePort();
 	BindingProvider bp = (BindingProvider)port;

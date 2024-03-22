@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.naming.NamingException;
 
 import com.employees.connector.DatabaseConnector;
 import com.employees.pojo.Employee;
@@ -23,7 +24,7 @@ public class EmployeeService {
     public List<Employee> getEmployees(){
     	List<Employee> employees = new ArrayList<Employee>();
     	try (Connection connection = DatabaseConnector.getConnection()) {
-        	PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM employees");
+        	PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM employees_Daniel");
         	ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -46,7 +47,7 @@ public class EmployeeService {
             }
             return employees;
             
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
     	}
 		return employees;
@@ -77,7 +78,7 @@ public class EmployeeService {
                );
         	}
     	}
-    	catch(SQLException e) {
+    	catch(SQLException | NamingException e) {
     		e.printStackTrace();
     	}
 		return null;
@@ -113,7 +114,7 @@ public class EmployeeService {
             	return "No Employee found with ID " + employee_id + ".";
         	}
         }
-    	catch(SQLException e) {
+    	catch(SQLException | NamingException e) {
     		e.printStackTrace();
     		return "Error occurred while updating Employee with ID " + employee_id + ": " + e.getMessage();
     	}
@@ -149,7 +150,7 @@ public class EmployeeService {
             	return "Error while creating Employee";
         	}
         }
-    	catch(SQLException e) {
+    	catch(SQLException | NamingException e) {
     		e.printStackTrace();
     		return "Error occurred while creating Employee: " + e.getMessage();
     	}
@@ -170,7 +171,7 @@ public class EmployeeService {
         		return "No Employee found with ID " + employee_id + ".";
         	}
         }
-    	catch(SQLException e) {
+    	catch(SQLException | NamingException e) {
     		e.printStackTrace();
     		return "Error while deleting Employee with ID " + employee_id + ": " + e.getMessage();
     	}
