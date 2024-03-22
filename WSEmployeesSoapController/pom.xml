@@ -1,0 +1,147 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>WSEmployeesSoapController</groupId>
+  <artifactId>WSEmployeesSoapController</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <properties>
+    <org.springframework.version>4.1.1.RELEASE</org.springframework.version>
+    <org.springdata.version>1.7.1.RELEASE</org.springdata.version>
+    <jaxws.version>2.1.4</jaxws.version>
+</properties>
+    <dependencies>
+	  	<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>${jaxws.version}</version>
+			</dependency>
+    	<dependency>
+        	<groupId>mysql</groupId>
+        	<artifactId>mysql-connector-java</artifactId>
+        	<version>8.0.29</version>
+        	<scope>provided</scope>
+    	</dependency>
+    	
+    	<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>4.0.1</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-context</artifactId>
+    		<version>${org.springframework.version}</version>
+    		<scope>provided</scope>
+		</dependency>
+		
+		
+		<!-- INIZIO -->
+		
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-core</artifactId>
+	<version>${org.springframework.version}</version>
+	<scope>provided</scope>
+</dependency>
+
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-context</artifactId>
+	<version>${org.springframework.version}</version>
+	<scope>provided</scope>
+</dependency>
+
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-webmvc</artifactId>
+	<version>${org.springframework.version}</version>
+	<scope>provided</scope>
+</dependency>
+
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-context-support</artifactId>
+	<version>${org.springframework.version}</version>
+	<scope>provided</scope>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-test</artifactId>
+	<version>${org.springframework.version}</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-orm</artifactId>
+	<version>${org.springframework.version}</version>
+	<scope>provided</scope>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-tx</artifactId>
+	<version>${org.springframework.version}</version>
+	<scope>provided</scope>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-jdbc</artifactId>
+	<version>${org.springframework.version}</version>
+	<scope>provided</scope>
+</dependency>
+<dependency>
+	<groupId>org.springframework.data</groupId>
+	<artifactId>spring-data-jpa</artifactId>
+	<version>${org.springdata.version}</version>
+	<scope>provided</scope>
+</dependency>
+<!--  Needed for XML View (with JAXB2)  -->
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-oxm</artifactId>
+	<version>${org.springframework.version}</version>
+	<scope>provided</scope>
+</dependency>
+<dependency>
+	<groupId>org.springframework.data</groupId>
+	<artifactId>spring-data-commons</artifactId>
+	<version>1.9.1.RELEASE</version>
+	<scope>provided</scope>
+</dependency>
+		
+		
+		<!-- FINE -->
+		
+		
+<dependency>
+	<groupId>javax.ws.rs</groupId>
+	<artifactId>javax.ws.rs-api</artifactId>
+	<version>2.0</version>
+	<scope>provided</scope>
+	</dependency>
+    	<dependency>
+  			<groupId>WSEmployeesSoapClient</groupId>
+  			<artifactId>WSEmployeesSoapClient</artifactId>
+  			<version>0.0.1-SNAPSHOT</version>
+    	</dependency>
+    </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+      </plugin>
+    </plugins>
+    
+    
+  </build>
+</project>

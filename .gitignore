@@ -1,0 +1,56 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.nar
+
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Serena Dimensions file
+.metadata/
+.apt_generated/
+.dmignore
+*.classpath*
+*.settings*
+*recommenders*
+RemoteSystemsTempFiles
+*node_modules*
+*dist*
+*target*
+# Compiled class file
+
+# Log file
+
+# BlueJ files
+
+# Mobile Tools for Java (J2ME)
+
+# Package Files #
+
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+/bin/
+# Serena Dimensions file
+*.factorypath*
+tasks.json
+/Servers*
+/NuovoPortaleAgevolazioniWeb/src/main/webapp/src/app/environments/environment.ts
+/NuovoPortaleAgevolazioniIntranetWeb/src/main/webapp/src/app/environments/environment.ts
+/NuovoPortaleAgevolazioniServiceLayer/src/main/resources/inputs/*
+/NuovoPortaleAgevolazioniServiceLayer/src/main/resources/outputs/*
+# Visual Studio Code workspace
+*.code-workspace
+*.project
+/build/
+package-lock.json
