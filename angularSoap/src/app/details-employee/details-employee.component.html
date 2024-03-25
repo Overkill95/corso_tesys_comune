@@ -1,0 +1,41 @@
+
+@for(item of arrEmployee; track employee.employeeId){
+<h1>Dipendente: {{item.firstName}}</h1>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+<table class="table">
+    <thead>
+      <tr>
+       
+        <th scope="col">Name</th>
+      <th scope="col">Email</th>
+        <th scope="col">Phone</th> 
+        <th scope="col">Hire date</th>
+       <th scope="col">Salary</th>
+       <th scope="col">Manager id</th> 
+        <th scope="col">Department id</th>
+      </tr>
+    </thead>
+   <tbody>
+  
+
+    
+        <tr>
+         
+          <td>{{item.firstName}} {{item.lastName}}</td>
+           <td>{{item.email}}</td> 
+           <td>{{item.phoneNumber}}</td> 
+           <td>{{item.formattedHireDate}}</td>
+          <td>{{item.salary}}</td>
+          <td>{{item.managerId}}</td>
+          <td>{{item.departmentId}}</td>
+          
+        </tr>
+
+   </tbody>
+  </table>
+</div>
+</div>
+</div>
+}

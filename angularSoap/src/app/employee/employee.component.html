@@ -1,0 +1,33 @@
+<h1>Dipendenti</h1>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Department id</th>
+        
+
+      </tr>
+    </thead>
+   <tbody>
+  
+@for(employee of employees; track employee.employeeId){
+    
+        <tr>
+          <td>{{employee.employeeId}}</td>
+          <td>{{employee.firstName}} {{employee.lastName}} </td>
+          <td>{{employee.departmentId}}</td>
+          <td> <a [routerLink]="['/details',employee.employeeId]" routerLinkActive><i class="fas fa-eye"></i></a></td>
+          <td><a  (click)="deleteItem(employee.employeeId)"><i class="fas fa-trash"></i></a></td>
+        </tr>
+
+}
+
+   </tbody>
+  </table>
+</div>
+</div>
+</div>
