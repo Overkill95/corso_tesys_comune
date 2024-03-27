@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    	   http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd           
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+           
+    <context:component-scan base-package="com.employees">		
+	</context:component-scan>
+
+	<context:annotation-config />
+	
+
+	
+
+	<bean id="hibernateJpaVendorAdapterDb"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+	</bean>
+
+	<bean id="dataSourceCorso" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="${spring.datasource.jndi-name}" />
+		<property name="resourceRef" value="true" />
+	</bean>
+	
+	
+
+	
+	
+	<!-- 
+	<bean id="dataSourceAgendaSedi" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="${nuovoportale.sql.agendasedi.jndi}" />
+		<property name="resourceRef" value="true" />
+	</bean>
+	 -->
+
+	<bean id="entityManagerFactoryCorso"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSourceCorso" />
+		<property name="packagesToScan" value="com.employees.pojo" />
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapterDb" />
+		<property name="persistenceUnitName" value="persistence" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">${spring.jpa.properties.hibernate.dialect}</prop>
+				<prop key="hibernate.format_sql">${spring.format-sql}</prop>
+				<prop key="hibernate.show_sql">${spring.jpa.show-sql}</prop>
+				<prop key="hibernate.jdbc.use_get_generated_keys">false</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	
+	
+	
+
+	
+	
+	<!-- 
+	<bean id="entityManagerFactoryAgendaSedi"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSourceAgendaSedi" />
+		<property name="packagesToScan" value="it.eng.inps.nuovoportale.agendasedi.entities" />
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapterDb" />
+		<property name="persistenceUnitName" value="persistence" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">${nuovoportale.sql.agendasedi.dialect}</prop>
+				<prop key="hibernate.format_sql">${nuovoportale.sql.agendasedi.format_sql}</prop>
+				<prop key="hibernate.show_sql">${nuovoportale.sql.agendasedi.show_sql}</prop>
+				<prop key="hibernate.jdbc.use_get_generated_keys">false</prop>
+			</props>
+		</property>
+	</bean>
+ 	-->
+ 	
+	<bean id="transactionManagerCorso" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactoryCorso" />
+	</bean>
+	
+	
+	
+	
+	<!-- 
+	<bean id="transactionManagerAgendaSedi" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactoryAgendaSedi" />
+	</bean>
+	 -->
+
+	<jpa:repositories base-package="com.employees.repository"
+		entity-manager-factory-ref="entityManagerFactoryCorso"
+		transaction-manager-ref="transactionManagerCorso" />
+		
+	
+	
+	
+	<!-- 	
+	<jpa:repositories base-package="it.eng.inps.nuovoportale.agendasedi.repositories"
+		entity-manager-factory-ref="entityManagerFactoryAgendaSedi"
+		transaction-manager-ref="transactionManagerAgendaSedi" />
+	 -->
+
+
+	<tx:annotation-driven transaction-manager="transactionManagerCorso" />
+	
+	
+	<!-- 
+	<tx:annotation-driven transaction-manager="transactionManagerAgendaSedi" />
+  	-->
+  	
+  		<context:property-placeholder location="classpath*:application.properties"/>
+
+</beans>

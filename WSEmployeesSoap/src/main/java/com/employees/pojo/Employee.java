@@ -1,135 +1,178 @@
 package com.employees.pojo;
 
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Id;
+
 import java.util.Date;
 
+import javax.persistence.Column;
+
+
+
+@Entity
+@Table(name = "employees_Daniel")
 public class Employee {
 
-	private int employee_id;
-	private String first_name;
-	private String last_name;
-	private String email;
-	private String phone_number;
-	private Date hire_date;
-	private int job_id;
-	private BigDecimal salary;
-	private int manager_id;
-	private int department_id;
-	
-	public int getEmployee_id() {
-		return employee_id;
-	}
-	
-	public void setEmployee_id(int employee_id) {
-		this.employee_id = employee_id;
-	}
-	
-	public String getFirst_name() {
-		return first_name;
-	}
-	
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
-	
-	public String getLast_name() {
-		return last_name;
-	}
-	
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public String getPhone_number() {
-		return phone_number;
-	}
-	
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
-	}
-	
-	public Date getHire_date() {
-		return hire_date;
-	}
-	
-	public void setHire_date(Date hire_date) {
-		this.hire_date = hire_date;
-	}
-	
-	public int getJob_id() {
-		return job_id;
-	}
-	
-	public void setJob_id(int job_id) {
-		this.job_id = job_id;
-	}
-	
-	public BigDecimal getSalary() {
-		return salary;
-	}
-	
-	public void setSalary(BigDecimal salary) {
-		this.salary = salary;
-	}
-	
-	public int getManager_id() {
-		return manager_id;
-	}
-	
-	public void setManager_id(int manager_id) {
-		this.manager_id = manager_id;
-	}
-	
-	public int getDepartment_id() {
-		return department_id;
-	}
-	
-	public void setDepartment_id(int department_id) {
-		this.department_id = department_id;
-	}
+	  	@Id
+	  	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "employee_id")
+	    private Integer employeeId;// Devono avere lo stesso nome del body del json
+	    
+	    @Column(name = "first_name")
+	    private String firstName;
+	       
+	    @Column(name = "last_name")
+	    private String lastName;
+	    
+	    @Column(name = "email")
+	    private String email;
+	  
+	    @Column(name = "phone_number")
+	    private String phoneNumber;
 
-	public String getFormattedHireDate() {
-        if (hire_date == null) {
-            return null;
-        }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return dateFormat.format(hire_date);
-    }
+	    @Column(name = "hire_date")
+	    @Temporal(TemporalType.DATE)
+	    private Date hireDate;
+	    
+	    @Column(name = "job_id")
+	    private int jobId;
+	 
+	    @Column(name = "salary")
+	    private double salary;
+	    
+	    @Column(name = "manager_id")
+	    private Integer managerId;
+	    
+	    @Column(name = "department_id")
+	    private Integer departmentId;
+	    
 
-   
-    public void setFormattedHireDate(String formattedDate) {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            this.hire_date = new Date(dateFormat.parse(formattedDate).getTime());
-        } catch (Exception e) {
-            
-            e.printStackTrace();
-            
-        }
+    public Employee(Integer employeeId, String firstName, String lastName, String email, String phoneNumber,
+                    Date hireDate,int jobId, double salary, Integer managerId, Integer departmentId) {
+        this.employeeId = employeeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.hireDate = hireDate;
+        this.jobId = jobId;
+        this.salary = salary;
+        this.managerId = managerId;
+        this.departmentId = departmentId;
     }
     
-    
-    public Employee(int employee_id, String first_name, String last_name, String email, String phone_number, Date hire_date, int job_id, BigDecimal salary, int manager_id, int department_id) {
-    	this.employee_id = employee_id;
-    	this.first_name = first_name;
-    	this.last_name = last_name;
-    	this.email = email;
-    	this.phone_number = phone_number;
-    	this.hire_date = hire_date;
-    	this.job_id = job_id;
-    	this.salary = salary;
-    	this.manager_id = manager_id;
-    	this.department_id = department_id;
+    public Employee() {
+       
     }
-	
-	
+    
+
+    
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Date getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public Integer getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(int jobId) {
+        this.jobId = jobId;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public Integer getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(Integer managerId) {
+        this.managerId = managerId;
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+    
+//    public String getFormattedHireDate() {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        return hireDate.format(formatter);
+//    }
+
+  
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", hireDate=" + hireDate +
+                ", jobId='" + jobId + '\'' +
+                ", salary=" + salary +
+                ", managerId=" + managerId +
+                ", departmentId=" + departmentId +
+                '}';
+    }
 }
+
