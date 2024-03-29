@@ -41,7 +41,7 @@ public class Employee {
 	    private Date hireDate;
 	    
 	    @Column(name = "job_id")
-	    private int jobId;
+	    private Integer jobId;
 	 
 	    @Column(name = "salary")
 	    private double salary;
@@ -54,7 +54,7 @@ public class Employee {
 	    
 
     public Employee(Integer employeeId, String firstName, String lastName, String email, String phoneNumber,
-                    Date hireDate,int jobId, double salary, Integer managerId, Integer departmentId) {
+                    Date hireDate,Integer jobId, double salary, Integer managerId, Integer departmentId) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -125,7 +125,7 @@ public class Employee {
         return jobId;
     }
 
-    public void setJobId(int jobId) {
+    public void setJobId(Integer jobId) {
         this.jobId = jobId;
     }
 
