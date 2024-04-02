@@ -3,21 +3,65 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context.xsd
-                           http://www.springframework.org/schema/mvc
-                           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
    
     <context:component-scan base-package="com"/>
+    
+    
 
 
     <mvc:annotation-driven/>
-
     
+    <context:annotation-config />
 
+
+	<bean id="hibernateJpaVendorAdapterDb"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+	</bean>
+    
+	<bean id="dataSourceUser" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="${spring.datasource.jndi-name}" />
+		<property name="resourceRef" value="true" />
+	</bean>
+	
+	<bean id="entityManagerFactoryUser"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSourceUser" />
+		<property name="packagesToScan" value="com.controller.entity" />
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapterDb" />
+		<property name="persistenceUnitName" value="persistence" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">${spring.jpa.properties.hibernate.dialect}</prop>
+				<prop key="hibernate.format_sql">${spring.format-sql}</prop>
+				<prop key="hibernate.show_sql">${spring.jpa.show-sql}</prop>
+				<prop key="hibernate.jdbc.use_get_generated_keys">false</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	<bean id="transactionManagerUser" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactoryUser" />
+	</bean>
+	
+	
+	
+	<jpa:repositories base-package="com.controller.repository"
+		entity-manager-factory-ref="entityManagerFactoryUser"
+		transaction-manager-ref="transactionManagerUser" />
+		
+		<tx:annotation-driven transaction-manager="transactionManagerUser" />
+		
+		<context:property-placeholder location="classpath*:application.properties"/>
 
     
 

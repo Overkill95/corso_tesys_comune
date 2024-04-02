@@ -5,12 +5,19 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <properties>
-    <org.springframework.version>4.1.1.RELEASE</org.springframework.version>
+    <org.springframework.version>4.2.4.RELEASE</org.springframework.version>
     <org.springdata.version>1.7.1.RELEASE</org.springdata.version>
     <jaxws.version>2.1.4</jaxws.version>
 </properties>
 
 <dependencies>
+	
+	<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-web</artifactId>
+    <version>${org.springframework.version}</version>
+</dependency>
+
 
 <dependency>
       <groupId>org.springframework</groupId>
@@ -135,14 +142,22 @@
 	<dependency>
 	    <groupId>org.springframework.security</groupId>
 	    <artifactId>spring-security-web</artifactId>
-	    <version>5.5.0</version>
+	    <version>4.1.5.RELEASE</version>
    </dependency>
    
    <dependency>
 	    <groupId>org.springframework.security</groupId>
 	    <artifactId>spring-security-config</artifactId>
-	    <version>5.5.0</version> 
+	    <version>4.1.5.RELEASE</version> 
    </dependency>
+   
+   <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>4.0.1</version> <!-- O la versione più appropriata per la tua applicazione -->
+</dependency>
+
+
     
   </dependencies>
   
@@ -160,6 +175,9 @@
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.2.3</version>
+         <configuration>
+        <packagingExcludes>**/module-info.class</packagingExcludes>
+    </configuration>
       </plugin>
       
       <plugin>
