@@ -152,10 +152,29 @@
    </dependency>
    
    <dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-    <version>4.0.1</version> <!-- O la versione più appropriata per la tua applicazione -->
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>4.0.1</version> <!-- O la versione più appropriata per la tua applicazione -->
+   </dependency>
+
+<!-- JJWT Token -->
+
+	<dependency>
+	    <groupId>io.jsonwebtoken</groupId>
+	    <artifactId>jjwt</artifactId>
+	    <version>0.9.1</version>
+	</dependency>
+	
+	
+	
+
+
+<dependency>
+    <groupId>com.auth0</groupId>
+    <artifactId>java-jwt</artifactId>
+    <version>3.10.3</version>
 </dependency>
+
 
 
     

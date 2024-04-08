@@ -19,7 +19,9 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     // this.fetchEmployees();
+
     this.loadEmployees();
+    
 
   }
 

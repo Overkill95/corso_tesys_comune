@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Employee } from '../employee';
 
-const BASE_URL='http://localhost:9083/WSEmployeesSoapController';
+const BASE_URL='/WSEmployeesSoapController';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +19,7 @@ private http = inject(HttpClient)
   }
 
   getEmployeeById(id:any){
-    return this.http.get<Employee>(BASE_URL + `/getEmployee/${id}`);
+    return this.http.get<Employee>(BASE_URL + `/getEmployee?id=${id}`);
   }
 
 

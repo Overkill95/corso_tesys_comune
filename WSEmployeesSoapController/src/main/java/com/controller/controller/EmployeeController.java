@@ -3,10 +3,16 @@ package com.controller.controller;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +28,18 @@ import com.employees.service.EmployeeDto;
 @RestController
 public class EmployeeController{
 	
+    private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
+	
 	
 	@Autowired
 	EmplService emplService;
 	
 	@RequestMapping(value = "/getEmployees", method = RequestMethod.GET, produces = "application/json")
-	public List<EmployeeDto> getEmployees(){
+	public List<EmployeeDto> getEmployees(HttpServletRequest request, HttpServletResponse response){
+		HttpSession session = request.getSession(false);
+		SecurityContext secContext = securityContextHolderStrategy.getContext();
+		String authenticationHeader = (String) request.getAttribute("Authorization");
+		String authenticationHeader2 = (String) request.getHeader("Authorization");
 		return emplService.getEmployees();
 	}
 	

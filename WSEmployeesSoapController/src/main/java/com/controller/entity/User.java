@@ -4,6 +4,8 @@ import javax.persistence.Table;
 
 import javax.persistence.Id;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,10 +17,14 @@ import javax.persistence.GenerationType;
 @Table(name = "Users_Daniel")
 public class User {
 	
+//	@Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+	
+	
 	
 			@Id
-		  	@GeneratedValue(strategy = GenerationType.IDENTITY)
-		    @Column(name = "username")
+			@Column(name = "username")
 		    private String username;
 		    
 		    @Column(name = "password")
@@ -26,6 +32,14 @@ public class User {
 		       
 		    @Column(name = "role")
 		    private String role;
+		    
+//		    public Long getId() {
+//				return id;
+//			}
+//
+//			public void setId(Long id) {
+//				this.id = id;
+//			}
 
 			public String getUsername() {
 				return username;
@@ -47,7 +61,7 @@ public class User {
 				return role;
 			}
 			
-			public void setEnabled(String role) {
-				this.role = role;
+			public void setRole(String list) {
+				this.role = list;
 			}
 }

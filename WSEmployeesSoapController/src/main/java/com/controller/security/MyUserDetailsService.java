@@ -1,7 +1,10 @@
 package com.controller.security;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,8 @@ public class MyUserDetailsService implements UserDetailsService{
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(User user) {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole())); 
+    	List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
+    	auths.add(new SimpleGrantedAuthority("ROLE_"+user.getRole()));
+    	return auths;
     }
 }
