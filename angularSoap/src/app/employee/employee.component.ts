@@ -1,17 +1,21 @@
 import { Component,OnInit,inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EmployeeService } from '../services/employee.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
 })
 export class EmployeeComponent implements OnInit {
+  
+  constructor(public authService: AuthService, private router: Router) { }
 
   //http = inject(HttpClient)
   private employeeService = inject(EmployeeService)

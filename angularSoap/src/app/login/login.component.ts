@@ -2,6 +2,56 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { RouterModule } from '@angular/router'
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [ReactiveFormsModule, RouterModule],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+  public loginForm: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService, 
+    private router: Router
+  ) {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  ngOnInit(): void {
+  }
+
+  login() {
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value;
+      this.authService.login(username, password).subscribe({
+        next: (data) => {
+          console.log('Login successful');
+          
+          this.router.navigate(['/employees']);
+        },
+        error: (error) => {
+          console.error('Login failed', error);
+          alert("Credenziali errate");
+        }
+      });
+    }
+  }
+}
+
+
+/* import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterModule } from '@angular/router'
 
 @Component({
@@ -67,7 +117,8 @@ export class LoginComponent {
       }
     },err=>{
       alert("Something went wrong")
-    }) */
+    }) 
   }
 
 }
+ */
