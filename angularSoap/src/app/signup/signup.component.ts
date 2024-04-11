@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterModule } from '@angular/router'
+import { EmployeeService } from '../services/employee.service';
+import { UserDto } from '../user-dto';
 
 @Component({
   selector: 'app-signup',
@@ -14,14 +16,27 @@ import { RouterModule } from '@angular/router'
 export class SignupComponent {
   public signupForm: FormGroup;
 
+  jobId = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10','11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
+  roles: string[] = ['ADMIN', 'USER'];
 
-  constructor(private formbuilder: FormBuilder,private http: HttpClient, private router: Router,private route: ActivatedRoute){
+  constructor(private formbuilder: FormBuilder,private http: HttpClient, private router: Router,private route: ActivatedRoute, private employeeService: EmployeeService){
     this.signupForm = this.formbuilder.group({
       username: [''],
       password: ['', Validators.required],
-      role: ['']
+      role: ['', Validators.required],
+      jobId : [''],
+      firstName : [''],
+      lastName : [''],
+      email : [''],
+      phoneNumber : [''],
+      hireDate : [''],
+      salary : [],
+      managerId : [],
+      departmentId : []
       // this.formbuilder.array([])
     })
+
+   
   }
 
   ngOnInit(): void {
@@ -29,21 +44,46 @@ export class SignupComponent {
   }
 
   signup(){
-    const loginPayload = {
+    
+    this.addEmployee();
+    
+  
+  }
+
+  addEmployee(){
+
+    const userDto: UserDto = {
       username: this.signupForm.value.username,
       password: this.signupForm.value.password,
       role: [this.signupForm.value.role]
     };
-    this.http.post<any>('/WSEmployeesSoapController' + '/addUser', loginPayload).subscribe(data => {
-      console.log('SignUp successful');
-      
-       
-        this.router.navigate(['/login']);
-  },
-  error => {
-      console.error('SignUp failed');
-      alert("Qualcosa è andato storto");
-  });
+
+
+    const employee = {
+      firstName: this.signupForm.value.firstName,
+      lastName: this.signupForm.value.lastName,
+      email: this.signupForm.value.email,
+      phoneNumber: this.signupForm.value.phoneNumber,
+      hireDate: this.signupForm.value.hireDate,
+      jobId: this.signupForm.value.jobId,
+      salary: this.signupForm.value.salary,
+      managerId: this.signupForm.value.managerId,
+      departmentId: this.signupForm.value.departmentId,
+      user: userDto
+      // user: {
+      //   username: this.signupForm.value.username,
+        
+      // }
+  
+    };
+    this.http.post<any>('/WSEmployeesSoapController' + '/addEmployee', employee).subscribe(data => {
+      // this.employeeService.addEmployee(employee).subscribe(data =>{
+          console.log("utente registrato")
+      },
+      error =>{
+        console.error('utente non inserito');
+        alert("Qualcosa è andato storto");
+      });
   }
 
 }
