@@ -22,5 +22,9 @@ private http = inject(HttpClient)
     return this.http.get<Employee>(BASE_URL + `/getEmployee?id=${id}`);
   }
 
+  addEmployee(user:any){
+    return this.http.post<Employee>(BASE_URL + "/addEmployee", {user});
+  }
+
 
 }
