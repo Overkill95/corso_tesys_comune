@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import com.controller.converter.DtoToEntity;
 import com.controller.service.EmplService;
 
 import com.employees.service.EmployeeDto;
@@ -30,6 +31,8 @@ public class EmployeeController{
 	
     private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
 	
+    @Autowired
+    DtoToEntity converterDto;
 	
 	@Autowired
 	EmplService emplService;
@@ -50,8 +53,21 @@ public class EmployeeController{
 	
 	
 	@RequestMapping(value = "/addEmployee", method = RequestMethod.POST, produces = "application/json")
-    public void addEmployee(@RequestBody EmployeeDto employee) {
+    public void addEmployee(@RequestBody EmployeeDto employee, HttpServletRequest request, HttpServletResponse response) {
+		
+		
+//		  EmployeeDto newEmployee = new EmployeeDto();
+//		  
+//		  newEmployee.setEmail(employee.getEmail());
+////		  newEmployee.setUser(employee.getUser().getUsername());
+		 
+		  
+		 
+		converterDto.convert(employee);
+
+		
 		emplService.addEmployee(employee);
+		
     }
 	
 	@RequestMapping(value = "/deleteEmployee/{employeeId}", method = RequestMethod.DELETE, produces = "application/json")
