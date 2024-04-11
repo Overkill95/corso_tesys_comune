@@ -8,9 +8,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 
@@ -52,8 +55,22 @@ public class Employee {
 	    @Column(name = "department_id")
 	    private Integer departmentId;
 	    
+	    @OneToOne(cascade = CascadeType.ALL)
+	    @JoinColumn(name = "Username", referencedColumnName = "username")
+	    private User username;
+	    
 
-    public Employee(Integer employeeId, String firstName, String lastName, String email, String phoneNumber,
+    
+
+	public User getUsername() {
+			return username;
+		}
+
+		public void setUsername(User username) {
+			this.username = username;
+		}
+
+	public Employee(Integer employeeId, String firstName, String lastName, String email, String phoneNumber,
                     Date hireDate,Integer jobId, double salary, Integer managerId, Integer departmentId) {
         this.employeeId = employeeId;
         this.firstName = firstName;
