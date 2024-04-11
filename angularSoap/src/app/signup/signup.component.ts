@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterModule } from '@angular/router'
 import { EmployeeService } from '../services/employee.service';
+import { JobService } from '../services/job.service';
 import { UserDto } from '../user-dto';
 
 @Component({
@@ -15,11 +16,11 @@ import { UserDto } from '../user-dto';
 })
 export class SignupComponent {
   public signupForm: FormGroup;
-
-  jobId = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10','11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
+  jobs:any = [];
+  managerId:any = ['100','101','102','103','108','114','123','201'];
   roles: string[] = ['ADMIN', 'USER'];
 
-  constructor(private formbuilder: FormBuilder,private http: HttpClient, private router: Router,private route: ActivatedRoute, private employeeService: EmployeeService){
+  constructor(private formbuilder: FormBuilder,private http: HttpClient, private router: Router,private route: ActivatedRoute, private employeeService: EmployeeService, private jobService: JobService){
     this.signupForm = this.formbuilder.group({
       username: [''],
       password: ['', Validators.required],
@@ -40,7 +41,7 @@ export class SignupComponent {
   }
 
   ngOnInit(): void {
-    
+    this.loadJobs();
   }
 
   signup(){
@@ -85,5 +86,13 @@ export class SignupComponent {
         alert("Qualcosa è andato storto");
       });
   }
+
+  loadJobs(){
+    this.jobService.getJobs().subscribe((job: any)=>{
+      console.log(job);
+      this.jobs = job;
+    });
+  }
+
 
 }
