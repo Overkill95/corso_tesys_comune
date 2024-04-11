@@ -2,6 +2,8 @@ package com.employees.dto;
 
 import java.util.Date;
 
+import com.user.dto.UserDto;
+
 public class EmployeeDto {
 	private Integer employeeId;
     private String firstName;
@@ -13,6 +15,7 @@ public class EmployeeDto {
     private double salary;
     private Integer managerId;
     private Integer departmentId;
+    private UserDto user;
 
 
     public EmployeeDto() {
@@ -114,6 +117,16 @@ public class EmployeeDto {
 
 	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
+	}
+
+
+	public UserDto getUser() {
+		return user;
+	}
+
+
+	public void setUser(UserDto user) {
+		this.user = user;
 	}
 }
 
