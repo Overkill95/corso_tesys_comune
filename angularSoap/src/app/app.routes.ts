@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import { SignupComponent } from './signup/signup.component';
+import { DepartmentComponent } from './department/department.component';
 
 export const routes: Routes = [
     {path: 'details/:id',component: DetailsEmployeeComponent },
@@ -12,6 +13,7 @@ export const routes: Routes = [
     {path:'employees',component:EmployeeComponent},
     {path:'login',component:LoginComponent},
     {path:'error',component:ErrorComponent},
-    {path:'signup',component:SignupComponent}
+    {path:'signup',component:SignupComponent},
+    {path:'departments',component:DepartmentComponent}
 
 ];
