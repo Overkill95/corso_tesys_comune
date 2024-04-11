@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import com.employees.converter.DtoToEntity;
 import com.employees.dto.EmployeeDto;
 import com.employees.pojo.Employee;
 import com.employees.repository.EmployeeRepository;
@@ -29,6 +30,10 @@ public class EmployeeServiceImpl extends SpringBeanAutowiringSupport implements 
 	
 	@Autowired
 	EmployeeMapperService employeeMapperService;
+	
+	@Autowired
+	DtoToEntity dtoToEntity;
+	
 	
 	@Override
 	public List<EmployeeDto> getAllEmployees() {
@@ -49,7 +54,8 @@ public class EmployeeServiceImpl extends SpringBeanAutowiringSupport implements 
 	@Override
 	public EmployeeDto addEmployee(EmployeeDto employeeDto) {
 		
-		Employee employee = employeeMapperService.convertToEntity(employeeDto);
+		//Employee employee = employeeMapperService.convertToEntity(employeeDto);
+		Employee employee = dtoToEntity.convert(employeeDto);
     	employee = employeRepository.save(employee); 
     	return employeeMapperService.converToDto(employee);
 	}
