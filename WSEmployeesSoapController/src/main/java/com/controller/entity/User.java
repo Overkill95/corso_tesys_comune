@@ -3,9 +3,11 @@ import javax.persistence.Table;
 
 
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,8 +23,9 @@ public class User {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 	
-	
-	
+			
+			
+		
 			@Id
 			@Column(name = "username")
 		    private String username;
@@ -33,6 +36,9 @@ public class User {
 		    @Column(name = "role")
 		    private String role;
 		    
+		    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+		    private Employee employee;
+		    
 //		    public Long getId() {
 //				return id;
 //			}
@@ -40,6 +46,14 @@ public class User {
 //			public void setId(Long id) {
 //				this.id = id;
 //			}
+
+			public Employee getEmployee() {
+				return employee;
+			}
+
+			public void setEmployee(Employee employee) {
+				this.employee = employee;
+			}
 
 			public String getUsername() {
 				return username;
