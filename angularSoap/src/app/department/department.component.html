@@ -1,0 +1,33 @@
+<h1>Departments</h1>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Location id</th>
+        
+
+      </tr>
+    </thead>
+   <tbody>
+  
+@for(department of departments; track department.departmetId){
+    
+        <tr>
+          <td>{{department.departmentId}}</td>
+          <td>{{department.departmentName}} </td>
+          <td>{{department.locationId}}</td>
+         <!--  <td *ngIf="authService.isAuthorized$ | async"> <a [routerLink]="['/details',employee.employeeId]" routerLinkActive><i class="fas fa-eye"></i></a></td>
+          <td *ngIf="authService.isAuthorized$ | async"><a  (click)="deleteItem(employee.employeeId)"><i class="fas fa-trash"></i></a></td> -->
+        </tr>
+
+}
+
+   </tbody>
+  </table>
+</div>
+</div>
+</div>
