@@ -17,25 +17,28 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "EmployeeServiceImplService", targetNamespace = "http://service.employees.com/", wsdlLocation = "file:/C:/Users/Utente/AppData/Local/Temp/tempdir11453704717281059405.tmp/EmployeeServiceImpl_1.wsdl")
+@WebServiceClient(name = "EmployeeServiceImplService", targetNamespace = "http://service.employees.com/", wsdlLocation = "EmployeeServiceImpl.wsdl")
 public class EmployeeServiceImplService
     extends Service
 {
 
+	private static final String WSDL = "EmployeeServiceImpl.wsdl";
     private final static URL EMPLOYEESERVICEIMPLSERVICE_WSDL_LOCATION;
     private final static WebServiceException EMPLOYEESERVICEIMPLSERVICE_EXCEPTION;
     private final static QName EMPLOYEESERVICEIMPLSERVICE_QNAME = new QName("http://service.employees.com/", "EmployeeServiceImplService");
-
+    
     static {
         URL url = null;
-        WebServiceException e = null;
+        WebServiceException ex = null;
         try {
-            url = new URL("file:/C:/Users/Utente/AppData/Local/Temp/tempdir11453704717281059405.tmp/EmployeeServiceImpl_1.wsdl");
-        } catch (MalformedURLException ex) {
-            e = new WebServiceException(ex);
+            url = EmployeeServiceImplService.class.getResource(WSDL);
+        } catch (Throwable e) {
+        	e.printStackTrace();
+        	ex = new WebServiceException(e);
         }
         EMPLOYEESERVICEIMPLSERVICE_WSDL_LOCATION = url;
-        EMPLOYEESERVICEIMPLSERVICE_EXCEPTION = e;
+        EMPLOYEESERVICEIMPLSERVICE_EXCEPTION = ex;
+        
     }
 
     public EmployeeServiceImplService() {
