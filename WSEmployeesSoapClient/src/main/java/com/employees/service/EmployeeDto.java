@@ -28,6 +28,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="managerId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="phoneNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="salary" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="user" type="{http://service.employees.com/}userDto" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -47,7 +48,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "lastName",
     "managerId",
     "phoneNumber",
-    "salary"
+    "salary",
+    "user"
 })
 public class EmployeeDto {
 
@@ -62,6 +64,7 @@ public class EmployeeDto {
     protected Integer managerId;
     protected String phoneNumber;
     protected double salary;
+    protected UserDto user;
 
     /**
      * Recupera il valore della proprietà departmentId.
@@ -293,6 +296,30 @@ public class EmployeeDto {
      */
     public void setSalary(double value) {
         this.salary = value;
+    }
+
+    /**
+     * Recupera il valore della proprietà user.
+     * 
+     * @return
+     *     possible object is
+     *     {@link UserDto }
+     *     
+     */
+    public UserDto getUser() {
+        return user;
+    }
+
+    /**
+     * Imposta il valore della proprietà user.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link UserDto }
+     *     
+     */
+    public void setUser(UserDto value) {
+        this.user = value;
     }
 
 }
