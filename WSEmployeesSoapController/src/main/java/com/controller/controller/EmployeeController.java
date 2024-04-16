@@ -1,6 +1,7 @@
 package com.controller.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +11,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.controller.converter.DtoToEntity;
+import com.controller.entity.Employee;
 import com.controller.service.EmplService;
 
 import com.employees.service.EmployeeDto;
@@ -37,6 +41,9 @@ public class EmployeeController{
 	@Autowired
 	EmplService emplService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@RequestMapping(value = "/getEmployees", method = RequestMethod.GET, produces = "application/json")
 	public List<EmployeeDto> getEmployees(HttpServletRequest request, HttpServletResponse response){
 		HttpSession session = request.getSession(false);
@@ -46,8 +53,9 @@ public class EmployeeController{
 		return emplService.getEmployees();
 	}
 	
+	@PreAuthorize(value = "hasPermission(#id, 'EMPLOYEE_GET')")
 	@RequestMapping(value="/getEmployee", method = RequestMethod.GET, produces = "application/json")
-	public EmployeeDto getEmployeeById(@RequestParam("id") int id){
+	public EmployeeDto getEmployeeById(@RequestParam("id") Integer id){
 		return emplService.getEmployeeById(id);
 	}
 	
@@ -63,18 +71,22 @@ public class EmployeeController{
 		 
 		  
 		 
-		converterDto.convert(employee);
+//		converterDto.convert(employee);
+		
+		employee.getUser().setPassword(passwordEncoder.encode(employee.getUser().getPassword()));
 
 		
 		emplService.addEmployee(employee);
 		
     }
 	
+	@PreAuthorize(value = "hasPermission(#employeeId, 'EMPLOYEE_DEL')")
 	@RequestMapping(value = "/deleteEmployee/{employeeId}", method = RequestMethod.DELETE, produces = "application/json")
-    public void deleteEmployee(@PathVariable int employeeId) {
+    public void deleteEmployee(@PathVariable Integer employeeId) {
 		emplService.deleteEmployee(employeeId);
     }
 	
+	@PreAuthorize(value = "hasPermission(#id, 'EMPLOYEE_UPDATE')")
 	@RequestMapping(value = "/updateEmployee/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<String> updateEmployee(@PathVariable("id") Integer id, @RequestBody EmployeeDto updatedEmployeeDto) {
 	    try {
@@ -85,6 +97,12 @@ public class EmployeeController{
 	    }
 	}
 
+	
+	@PreAuthorize(value = "hasPermission(#departmentId, 'DEPARTMENT_DEP')")
+	@RequestMapping(value="/getEmployeeByDepartment", method = RequestMethod.GET, produces = "application/json")
+	public List<EmployeeDto> getEmployeeBydepartmentId(@RequestParam("id") Integer departmentId){
+		return emplService.getEmployeesByDepartmentId(departmentId);
+	}
 	
 
 }
