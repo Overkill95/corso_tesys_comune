@@ -20,8 +20,9 @@
           <td>{{department.departmentId}}</td>
           <td>{{department.departmentName}} </td>
           <td>{{department.locationId}}</td>
-         <!--  <td *ngIf="authService.isAuthorized$ | async"> <a [routerLink]="['/details',employee.employeeId]" routerLinkActive><i class="fas fa-eye"></i></a></td>
-          <td *ngIf="authService.isAuthorized$ | async"><a  (click)="deleteItem(employee.employeeId)"><i class="fas fa-trash"></i></a></td> -->
+          <td *ngIf="authService.isAuthorized$ | async"><a  (click)="deleteItem(department.departmentId)"><i class="fas fa-trash"></i></a></td> 
+         <!--  <td *ngIf="authService.isAuthorized$ | async"> <a [routerLink]="['/details',employee.employeeId]" routerLinkActive><i class="fas fa-eye"></i></a></td>-->
+          
         </tr>
 
 }

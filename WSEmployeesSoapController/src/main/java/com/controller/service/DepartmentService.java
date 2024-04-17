@@ -30,4 +30,12 @@ public class DepartmentService {
 				
 			return departmentsDto;
 	}
+	
+	
+	public void deleteDepartment(int id) {
+		
+		departmentsRepository.delete(id);
+	}
+	
+	
 }
