@@ -22,16 +22,17 @@ public class DepartmentController {
 	@Autowired
 	DepartmentService departmentService;
 	
+	
 	@RequestMapping(value = "/getDepartments", method = RequestMethod.GET, produces = "application/json")
     public List<DepartmentsDto> getDepartments(HttpServletRequest request, HttpServletResponse response) {
 		return departmentService.getDepartments();
 	
     }
 	
-	
+	@PreAuthorize(value = "hasPermission(#departmentId, 'DEPARTMENT_DEL')")
 	@RequestMapping(value = "/deleteDepartment/{depId}", method = RequestMethod.DELETE, produces = "application/json")
-    public void deleteEmployee(@PathVariable Integer depId) {
-		departmentService.deleteDepartment(depId);
+    public void deleteEmployee(@PathVariable Integer departmentId) {
+		departmentService.deleteDepartment(departmentId);
     }
 	
 	
