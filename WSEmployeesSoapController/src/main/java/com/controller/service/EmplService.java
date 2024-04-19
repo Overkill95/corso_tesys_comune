@@ -67,10 +67,10 @@ public class EmplService {
 		 port.updateEmployee(id, employee);
 	 }
 	 
-	 public Optional<EmployeeDto> findEmployeeByUsername(String username) {
+	 public EmployeeDto findEmployeeByUsername(String username) {
 	        
-		 Optional<Employee> employee =  emplRepository.getEmplByUsername(username);
-		 return employee.map(this::convertToDto);
+		 Employee employee =  emplRepository.getEmplByUsername(username);
+		 return employee != null ? convertToDto(employee) : null;
 		  
 	    }
 	 

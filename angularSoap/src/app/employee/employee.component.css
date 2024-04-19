@@ -14,3 +14,8 @@ a>i{
 .black{
     color: --bs-gray-dark;
 }
+
+h1{
+    text-align: center;
+    margin-top: 5%;
+}

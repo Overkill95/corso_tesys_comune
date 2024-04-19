@@ -40,7 +40,7 @@ public class EmployeeCustomPermissionEvaluator implements PermissionEvaluator{
 		}
 		else if(operazionePermesso.contains("EMPLOYEE")){
 			
-			return checkAuthorityEmployee((Integer) targetDomainObject, authentication);
+			return checkAuthorityEmployee(targetDomainObject, authentication, operazionePermesso);
 		
 			
 		}
@@ -73,19 +73,30 @@ public class EmployeeCustomPermissionEvaluator implements PermissionEvaluator{
 	}
 	
 	
-	private boolean checkAuthorityEmployee(Integer employeeId, Authentication authentication) {
+	private boolean checkAuthorityEmployee(Object targetObject, Authentication authentication, String operazionePermesso) {
 		
 		User user = (User) authentication.getPrincipal();
 		
 		String username = user.getUsername();
 		
-		Employee empl = emplRepository.findOne(employeeId);
+		Employee empl;
 		
-		if(empl == null) {
-			throw new IllegalArgumentException("ID IMPIEGATO: " + employeeId + " NON PRESENTE");
+		if(operazionePermesso.equalsIgnoreCase("EMPLOYEE_USERNAME")) {
+			String uname = (String) targetObject;
+			return username.equals(uname);
 		}
 		
-		return empl.getUser().getUsername().equals(username);
+		else {
+			Integer employeeId = (Integer) targetObject;
+			empl = emplRepository.findOne(employeeId);
+			if(empl == null) {
+				throw new IllegalArgumentException("ID IMPIEGATO NON PRESENTE");
+			}
+			
+			return empl.getUser().getUsername().equals(username);
+		}
+		
+		
 	}
 	
 	
@@ -97,10 +108,10 @@ public class EmployeeCustomPermissionEvaluator implements PermissionEvaluator{
 		String username = user.getUsername();
 		
 		Departments dep = departmentsRepository.findOne(departmentId);
-		Optional<Employee> empl = emplRepository.getEmplByUsername(username);
+		Employee empl = emplRepository.getEmplByUsername(username);
 		
 		
-		if(!empl.isPresent()) {
+		if(empl == null) {
 			throw new IllegalArgumentException("USERNAME IMPIEGATO: " + username + " NON PRESENTE");
 		}
 		
@@ -108,9 +119,7 @@ public class EmployeeCustomPermissionEvaluator implements PermissionEvaluator{
 			throw new IllegalArgumentException("ID DIPARTIMENTO: " + departmentId + " NON PRESENTE");
 		}
 		
-		Employee employee = empl.get();
-		
-		return dep.getDepartmentId().equals(employee.getDepartmentId());
+		return dep.getDepartmentId().equals(empl.getDepartmentId());
 		
 	}
 

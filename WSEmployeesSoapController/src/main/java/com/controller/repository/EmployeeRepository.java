@@ -15,7 +15,7 @@ import com.employees.service.EmployeeDto;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	
 	@Query(value = "Select e FROM Employee e INNER JOIN e.user u WHERE u.username = :username")
-	Optional<Employee> getEmplByUsername(@Param("username") String user);
+	Employee getEmplByUsername(@Param("username") String user);
 	
 	List<Employee> findByDepartmentId(Integer departmentId );
 	

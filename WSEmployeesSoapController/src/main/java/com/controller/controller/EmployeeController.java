@@ -97,7 +97,7 @@ public class EmployeeController{
 	
 	@PreAuthorize(value = "hasPermission(#employeeUsername, 'EMPLOYEE_USERNAME')")
 	@RequestMapping(value="/getEmployeeByUsername", method = RequestMethod.GET, produces = "application/json")
-	public Optional<EmployeeDto> getEmployeeByUsername(@RequestParam("username") String employeeUsername){
+	public EmployeeDto getEmployeeByUsername(@RequestParam("username") String employeeUsername){
 		return emplService.findEmployeeByUsername(employeeUsername);
 	}
 	
