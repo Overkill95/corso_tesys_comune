@@ -48,8 +48,8 @@
               </div>
               <div class="mb-3">
                 <label for="jobId" class="form-label">Select Job</label>
-                <select class="form-select" id="jobId" formControlName="jobId" aria-label="Job select">
-                  <option [ngValue]="null" disabled>JobId</option>
+                <select class="form-select" id="jobId" formControlName="jobId" aria-label="Job select" placeholder="Job">
+                  <option [ngValue]="null" disabled>jobId</option>
                    @for (job of jobs; track jobs){
                   <option  [ngValue]="job.jobId">{{job.jobId}} {{job.jobTitle}}</option>
               }
@@ -59,7 +59,7 @@
               <div class="mb-3">
                 <label for="managerId" class="form-label">Select ManagerId</label>
                 <select class="form-select" id="managerId" formControlName="managerId" aria-label="manager select">
-                  <option [ngValue]="null" disabled>ManagerId</option>
+                  <option [ngValue]="null" disabled>Manager</option>
                    @for (manager of managerId; track managerId){
                   <option  [ngValue]="manager">{{manager}} </option>
               }
@@ -69,39 +69,7 @@
                 <label for="departmentId" class="form-label">department id</label>
                 <input type="text" class="form-control" id="departmentId" formControlName="departmentId" placeholder="departmentId">
               </div>
-              <!-- <div class="mb-3">
-                <label for="role" class="form-label">Insert Role</label>
-                <input type="text" class="form-control" id="role" formControlName="role" placeholder="Role">
-              </div> -->
-              <!-- <div class="mb-3">
-                <label for="jobId" class="form-label">job id</label>
-                <input type="text" class="form-control" id="jobId" formControlName="jobId" placeholder="jobId">
-              </div> 
-              <div class="mb-3">
-                <label for="managerId" class="form-label">manager id</label>
-                <input type="text" class="form-control" id="managerId" formControlName="managerId" placeholder="managerId">
-              </div>-->
-              <!-- <div class="mb-3">
-                <label for="jobId" class="form-label">job id</label>
-                <select class="form-select" formControlName="jobId" aria-label="Default select example">
-                  <option selected>Open this select menu</option>
-                  <option *ngFor="let num of jobId" [value]="num">{{num}}</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="managerId" class="form-label">manager id</label>
-                <select class="form-select" formControlName="managerId" aria-label="Default select example">
-                  <option selected>Open this select menu</option>
-                  <option *ngFor="let num of jobId" [value]="num">{{num}}</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="departmentId" class="form-label">department id</label>
-                <select class="form-select" formControlName="jobId" aria-label="Default select example">
-                  <option selected>Open this select menu</option>
-                  <option *ngFor="let num of jobId" [value]="num">{{num}}</option>
-                </select>
-              </div> -->
+             
               <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary">Signup</button>
                <!--  <span>Do have an account? 

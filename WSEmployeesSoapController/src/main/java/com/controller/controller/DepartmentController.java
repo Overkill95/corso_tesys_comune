@@ -6,9 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.controller.dto.DepartmentsDto;
@@ -32,5 +34,10 @@ public class DepartmentController {
 		departmentService.deleteDepartment(depId);
     }
 	
-
+	
+	@PreAuthorize(value = "hasPermission(#departmentId, 'DEPARTMENT_DEP')")
+	@RequestMapping(value="/getDepartment", method = RequestMethod.GET, produces = "application/json")
+	public DepartmentsDto getDepartment(@RequestParam("id") Integer departmentId) {
+		return departmentService.getDepartmentById(departmentId);
+	}
 }

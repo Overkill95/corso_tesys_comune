@@ -104,5 +104,10 @@ public class EmployeeController{
 		return emplService.getEmployeesByDepartmentId(departmentId);
 	}
 	
+	@RequestMapping(value="/getEmployeeByUsername", method = RequestMethod.GET, produces = "application/json")
+	public Optional<EmployeeDto> getEmployeeByUsername(@RequestParam("username") String employeeUsername){
+		return emplService.findEmployeeByUsername(employeeUsername);
+	}
+	
 
 }

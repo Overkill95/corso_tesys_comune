@@ -38,4 +38,20 @@ public class DepartmentService {
 	}
 	
 	
+	public DepartmentsDto getDepartmentById(int id) {
+		Departments department = departmentsRepository.findOne(id);
+		
+		return convertToDto(department);
+	}
+	
+	public DepartmentsDto convertToDto(Departments department) {
+		DepartmentsDto dto = new DepartmentsDto();
+		
+		dto.setDepartmentId(department.getDepartmentId());
+		dto.setDepartmentName(department.getDepartmentName());
+		dto.setLocationId(department.getLocationId());
+		
+		return dto;
+	}
+	
 }

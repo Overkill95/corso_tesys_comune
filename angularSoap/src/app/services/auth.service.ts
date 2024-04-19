@@ -42,7 +42,12 @@ export class AuthService {
         map(user => user && Array.isArray(user.role) && user.role.includes('ROLE_ADMIN'))
       );
     }
-    
+
+    public get isUserAuthorized$(): Observable<boolean>{
+      return this.currentUser.pipe(
+        map(user => user && Array.isArray(user.role) && user.role.includes('ROLE_USER'))
+      )
+    }    
   
 
   public get currentUserValue() {

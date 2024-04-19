@@ -1,4 +1,16 @@
 i {
     cursor: pointer;
-    color: blue;
+    color: --bs-gray-dark;
+}
+
+a>i{
+    color: black;
+}
+
+.fa, .far, .fas{
+    color: --bs-gray-dark;
+}
+
+.black{
+    color: --bs-gray-dark;
 }

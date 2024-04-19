@@ -15,6 +15,12 @@ export class DepartmentService {
   }
 
 
+  getDepartment(id:any){
+    return this.http.get(BASE_URL + `/getDepartment?id=${id}`)
+
+  }
+
+
   deleteDepartment(id:number){
     return this.http.delete(BASE_URL + `/deleteDepartment/${id}`);
   }

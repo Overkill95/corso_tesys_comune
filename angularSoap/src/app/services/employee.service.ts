@@ -27,4 +27,13 @@ private http = inject(HttpClient)
   }
 
 
+  getEmployeeByUsername(username:any){
+    return this.http.get<Employee>(BASE_URL + `/getEmployeeByUsername?username=${username}`);
+  }
+
+  getEmployeeByDepartment(depId:any){
+    return this.http.get<Employee>(BASE_URL + `/getEmployeeByDepartment?id=${depId}`);
+  }
+
+
 }
